@@ -1,16 +1,30 @@
 
 <template>
+<div>
   <div class="root">
-    <a href="/">Home</a> |
-    <a href="/shop">Shop</a>
+    <nav>
+      <a @click="setActive('Home')" :class="{active: isActive('Home')}" href="/">Home</a>
+      <a @click="setActive('Shop')" :class="{active: isActive('Shop')}" href="/shop">Shop</a>
+    </nav>
   </div>
+</div>
 </template>
 
 
 
 <script>
 export default {
-  
+  props: [
+    'btn_active'
+  ],
+  methods: {
+    isActive: function(item) {
+      return item === this.btn_active;
+    },
+    setActive: function(item) {
+      this.btn_active = item;
+    }
+  }
 }
 </script>
 
@@ -19,18 +33,36 @@ export default {
 <style scoped>
 
 .root {
-  font-size: 1.3em;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  font-family: 'Segoe UI';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   display: inline;
   position: absolute;
-  right: 2vw;
-  top: 0;
+  left: 2vw;
+  top: 2.8rem;
 }
 
-.root a {
+a {
+  background: white;
+  color: #7D7D7D;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+}
+
+nav :first-child {
+  border-radius: 30px 0px 0px 30px;
+}
+
+nav :last-child {
+  border-radius: 0px 30px 30px 0px;
+}
+
+.active {
+  background: #38393D;
+  color: white;
 }
 
 </style>

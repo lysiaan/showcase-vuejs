@@ -4,6 +4,8 @@
   </div>
 </template>
 
+
+
 <script>
 import Home from './views/Home.vue'
 
@@ -15,8 +17,7 @@ export default {
 }
 </script>
 
-<style>
-#app {
 
-}
+
+<style>
 </style>
