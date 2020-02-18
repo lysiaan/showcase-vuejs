@@ -33,7 +33,7 @@ export default {
 <style scoped>
 
 .root {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
   font-family: 'Segoe UI';
   -webkit-font-smoothing: antialiased;
@@ -46,10 +46,11 @@ export default {
 }
 
 a {
-  background: white;
-  color: #7D7D7D;
+  background: #f0f0f0;
+  color: #959595;
   text-decoration: none;
-  padding: 0.8rem 2rem;
+  padding: 0.6rem 1.8rem;
+  box-shadow: 0 0 10px rgba(0,0,0, 0.2);
 }
 
 nav :first-child {
@@ -63,6 +64,7 @@ nav :last-child {
 .active {
   background: #38393D;
   color: white;
+  box-shadow: 0 0 10px rgba(0,0,0, 0.1);
 }
 
 </style>
