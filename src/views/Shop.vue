@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="root-shop">
+  <div class="root">
     <div class="blank"></div>
 
     <Menu btn_active="Shop"></Menu>
@@ -15,10 +15,28 @@
 
     <div class="products-container">
       <div class="product" :key="prod.id" v-for="prod in prods_current" >
-        <a >{{ prod.title }}</a>    
+        <div class="prod-thumbnail"></div>
+        <a class="prod-title">{{ prod.title }}</a>
+        <div class="prod-details">
+          <div class="prod-detail details-left">
+            <div class="details-left-contained">
+              <div class="prod-available">    
+                <div class="prod-available-icon"></div>
+                <span class="prod-available-text">en stock</span>
+              </div>
+              <div class="prod-price">
+                <a>{{ prod.price | formatPrice }} €</a>
+              </div>
+            </div>
+          </div>
+          <div class="prod-detail details-right">
+            <div class="prod-icon-cart">
+              <img src="../assets/logo-add.svg" alt="">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
 
   </div>
 </div>
@@ -46,6 +64,20 @@ export default {
     },
     setActiveCat: function(string) {
       this.is_cat_active = string;
+    },
+  },
+  filters: {
+    // Add '0' in the case of single decimal digit, and '.00' if no decimal
+    formatPrice: function(number) {
+      let returned = number.toString(); 
+      const splitted = returned.split('.');
+      if (splitted[1]) {
+        splitted[1].length > 0 && splitted[1].length < 2 ?
+          returned = returned + '0' : '';
+      } else {
+        returned = splitted[0] + '.00';
+      }
+      return returned;
     }
   },
   computed: {
@@ -71,7 +103,6 @@ export default {
           this.cats.push(prods[index].category);
         }
         this.is_cat_active = this.cats[0] ? this.cats[0] : '';
-        console.log(this.cats);    
       })
       .catch(error => console.warn("L'opération fetch sur les products n'a pas abouti : " + error));
   }
@@ -87,22 +118,103 @@ export default {
   width: 1px;
 }
 
+
+.details-right {
+  position: relative;
+  height: 100%;
+}
+
+.prod-icon-cart {
+  height: 100px;
+  width: 100px;
+  background: #4FAA5E;
+  border-radius: 20px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.prod-price {
+  font-weight: bolder;
+  font-size: 1.8em;
+  color: #38393D;
+  margin-top: 12px;
+}
+
+.details-left-contained {
+  height: 74px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.prod-available-icon {
+  height: 16px;
+  width: 16px;
+  background: #5CC86E;
+  border-radius: 20px;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  margin-right: 10px;
+}
+
+.prod-available-text {
+  text-transform: uppercase;
+  color: #5CC86E;
+  font-weight: bold;
+}
+
+.prod-detail {
+  width: 50%;
+  height: 200px;
+}
+
+.prod-details {
+  display: flex;
+}
+
+.prod-title {
+  text-transform: uppercase;
+  background: #38393D;
+  color: white;
+  display: block;
+  padding: 10px 5px;
+  font-weight: bold;
+}
+
+.prod-thumbnail {
+  height: 180px;
+  width: 100%;
+  background: #DFDFDF;
+}
+
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  width: 85vw;
+  width: 82vw;
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 100px;
 }
 
 .product {
-  width: 400px;
+  width: 330px;
   background: white;
+  box-shadow: 0 0 20px rgba(0,0,0, 0.2);
   margin: 30px 30px;
+  font-family: 'Segoe UI';
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.root-shop {
+.root {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
