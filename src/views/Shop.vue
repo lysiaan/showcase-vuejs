@@ -33,7 +33,7 @@
     </ul>
 
       <transition-group name="product-list"
-        enter-active-class="animated bounceIn"
+        enter-active-class="animated zoomIn"
         tag="div"
         v-bind:class="'products-container'">
         <div class="product" :key="prod.id" v-for="prod in prods_current" >
@@ -74,6 +74,7 @@
 import Menu from '../components/Menu';
 import "animate.css/source/_base.css";
 import "animate.css/source/bouncing_entrances/bounceIn.css";
+import "animate.css/source/zooming_entrances/zoomIn.css";
 import "animate.css/source/bouncing_entrances/bounceInRight.css";
 
 // Dans le cas d'une récupération de fichier qui ne serait pas
