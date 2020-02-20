@@ -33,12 +33,13 @@
     </ul>
 
       <transition-group name="product-list"
-        enter-active-class="animated zoomIn"
+        v-on:before-enter="beforeEnterProd"
+        v-on:enter="enterProd"
         tag="div"
         v-bind:class="'products-container'">
-        <div class="product" :key="prod.id" v-for="prod in prods_current" >
+        <div :data-index="index" class="product" :key="prod.id" v-for="(prod, index) in prods_current" >
           <div class="prod-thumbnail"></div>
-          <a class="prod-title">{{ prod.title }}</a>
+          <a class="prod-title">{{ prod.title }} - {{ index }}</a>
           <div class="prod-details">
             <div class="prod-detail details-left">
               <div class="details-left-contained">
@@ -101,6 +102,49 @@ export default {
     setActiveCat: function(string) {
       this.is_cat_active = string;
     },
+    beforeEnterProd: function(el) {
+      el.style.opacity = 0;
+      el.style.left = '-40px';
+    },
+    enterProd: function(el) {
+      // Apres avoir essayé d'appliquer des délais d'entrée sur
+      // un transition-group avec des classes CSS (animate.css),
+      // j'en conclus que cette feature n'est possible qu'en
+      // utilisant à la place des animations JS. En voici une
+      // custom, sans faire appel à une quelconque librairie.
+      // =====================================================
+      // Custom animation : Opacity
+      const delay = el.dataset.index * 100;
+      setTimeout(() => {
+        let opa = 0;
+        let decrease = 0.02;
+        const interval = setInterval(() => {
+          opa += decrease;
+          el.style.opacity = opa;
+          decrease -= - 0.0002;
+          // Check this for non infinite loop...
+          // console.log(el.style.opacity);
+          if (opa > 1) {
+            clearInterval(interval);
+          }
+        }, 1);
+      }, delay);
+      // Custom animation : leftIn
+      setTimeout(() => {
+        let pos = 50;
+        let decrease = 1;
+        const interval = setInterval(() => {
+          pos -= decrease;
+          el.style.left = '-'+pos+'px';
+          decrease -= 0.01;
+          // Check this for non infinite loop...
+          // console.log(el.style.left);
+          if (pos < 0) {
+            clearInterval(interval);
+          }
+        }, 1);
+      }, delay);
+    }
   },
   filters: {
     // Add '0' in the case of single decimal digit, and '.00' if no decimal
@@ -256,6 +300,7 @@ export default {
   font-family: 'Segoe UI';
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .root {
