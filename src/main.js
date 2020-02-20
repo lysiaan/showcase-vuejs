@@ -13,6 +13,7 @@ const routes = {
 
 // Filtre global de formattage appliqué aux v-bind ou aux mustaches {{ }}
 Vue.filter('formatPriceGlobal', function(number) {
+  // console.warn(number);
   let returned = number.toString(); 
   const splitted = returned.split('.');
   if (splitted[1]) {
