@@ -1,6 +1,8 @@
 <template>
   <div class="product">
-    <div class="prod-thumbnail"></div>
+    <div class="prod-thumbnail">
+      <img height=180 :src="image_path" alt="">
+    </div>
     <a class="prod-title">{{ title }}</a>
     <div class="prod-details">
       <div class="prod-detail details-left">
@@ -30,8 +32,13 @@
 <script>
 export default {
   props: [
-    'title', 'price'
+    'title', 'price', 'image'
   ],
+  computed: {
+    image_path: function() {
+      return "img/" + this.image;
+    }
+  },
   filters: {
     // Add '0' in the case of single decimal digit, and '.00' if no decimal
     formatPrice: function(number) {
@@ -59,10 +66,10 @@ export default {
 }
 
 .prod-icon-cart {
-  height: 100px;
-  width: 100px;
+  height: 90px;
+  width: 90px;
   background: #4FAA5E;
-  border-radius: 20px;
+  border-radius: 12px;
   position: relative;
   top: 50%;
   left: 50%;
@@ -70,6 +77,10 @@ export default {
   display: flex;
   justify-content: center;
   cursor: pointer;
+}
+
+.prod-icon-cart:hover {
+  background: #9abe0a;
 }
 
 .prod-price {

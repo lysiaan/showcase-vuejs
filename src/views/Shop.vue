@@ -27,7 +27,7 @@
       tag="div"
       v-bind:class="'products-container'">
       <Product :data-index="index" :key="prod.id" v-for="(prod, index) in prods_current"
-        v-bind:title="prod.title" v-bind:price="prod.price" v-bind:index="index"
+        :title="prod.title" :price="prod.price" :index="index" :image="prod.image"
       ></Product>
     </transition-group>
   </div>
@@ -41,8 +41,8 @@
 import Menu from '../components/Menu';
 import Product from '../components/Product';
 import "animate.css/source/_base.css";
-import "animate.css/source/bouncing_entrances/bounceIn.css";
-import "animate.css/source/zooming_entrances/zoomIn.css";
+// import "animate.css/source/bouncing_entrances/bounceIn.css";
+// import "animate.css/source/zooming_entrances/zoomIn.css";
 import "animate.css/source/bouncing_entrances/bounceInRight.css";
 
 // Dans le cas d'une récupération de fichier qui ne serait pas
@@ -169,6 +169,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
+  padding-bottom: 200px;
 }
 
 .root {

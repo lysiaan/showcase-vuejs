@@ -3,12 +3,13 @@
   "products": [
     {
       "id": 1,
-      "title": "Miel de lavande - 225g",
+      "title": "Miel de lavande - 250g",
       "category": "alimentaire",
-      "filename": "miel-lavande-225.jpg",
+      "filename": "miel-lavande-250.jpg",
       "price": 6.60,
       "rating": "",
-      "description": "" 
+      "description": "",
+      "image": "lavande-250.jpg"
     },
     {
       "id": 2,
@@ -17,7 +18,8 @@
       "filename": "miel-lavande-500.jpg",
       "price": 11,
       "rating": "",
-      "description": "" 
+      "description": "",
+      "image": "lavande-500.jpg"
     },
     {
       "id": 3,
@@ -26,7 +28,8 @@
       "filename": "bonbons.jpg",
       "price": 5.80,
       "rating": "",
-      "description": "" 
+      "description": "",
+      "image": "bonbons.png"
     },
     {
       "id": 4,
@@ -35,7 +38,8 @@
       "filename": "propolis-100.jpg",
       "price": 27.90,
       "rating": "",
-      "description": "" 
+      "description": "",
+      "image": "propolis.jpg"
     },
     {
       "id": 5,
@@ -44,7 +48,8 @@
       "filename": "gelee-20.jpg",
       "price": 42.45,
       "rating": "",
-      "description": "" 
+      "description": "",
+      "image": "gelee.jpg"
     }
   ]
 },
@@ -58,7 +63,8 @@
       "filename": "cadre.jpg",
       "price": 55.59,
       "rating": "",
-      "description": "" 
+      "description": "",
+      "image": "cadre.jpg"
     }
   ]
 }]
