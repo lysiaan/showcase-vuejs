@@ -1,0 +1,67 @@
+[{
+  "category": "alimentaire",
+  "products": [
+    {
+      "id": 1,
+      "title": "Miel de lavande - 225g",
+      "category": "alimentaire",
+      "filename": "miel-lavande-225.jpg",
+      "price": 6.60,
+      "rating": "",
+      "description": "" 
+    },
+    {
+      "id": 2,
+      "title": "Miel de lavande - 500g",
+      "category": "alimentaire",
+      "filename": "miel-lavande-500.jpg",
+      "price": 11,
+      "rating": "",
+      "description": "" 
+    },
+    {
+      "id": 3,
+      "title": "Bonbons au miel",
+      "category": "alimentaire",
+      "filename": "bonbons.jpg",
+      "price": 5.80,
+      "rating": "",
+      "description": "" 
+    },
+    {
+      "id": 4,
+      "title": "Propolis brute - 100g",
+      "category": "alimentaire",
+      "filename": "propolis-100.jpg",
+      "price": 27.90,
+      "rating": "",
+      "description": "" 
+    },
+    {
+      "id": 5,
+      "title": "Gelée royale - 20g",
+      "category": "alimentaire",
+      "filename": "gelee-20.jpg",
+      "price": 42.45,
+      "rating": "",
+      "description": "" 
+    }
+  ]
+},
+{
+  "category": "matériel",
+  "products": [
+    {
+      "id": 6,
+      "title": "Cadre pour ruche",
+      "category": "matériel",
+      "filename": "cadre.jpg",
+      "price": 55.59,
+      "rating": "",
+      "description": "" 
+    }
+  ]
+}]
+
+
+

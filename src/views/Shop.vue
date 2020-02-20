@@ -25,7 +25,9 @@
                 <span class="prod-available-text">en stock</span>
               </div>
               <div class="prod-price">
-                <a>{{ prod.price | formatPrice }} €</a>
+                <a>{{ prod.price | formatPriceGlobal }} €</a>
+                <!-- On peux aussi utiliser un filtre local du composant : -->
+                <!-- <a>{{ prod.price | formatPrice }} €</a> -->
               </div>
             </div>
           </div>
@@ -46,6 +48,11 @@
 
 <script>
 import Menu from '../components/Menu';
+
+// Dans le cas d'une récupération de fichier qui ne serait pas
+// dans le dossier  public, utilier require :
+// const test = require('../assets/test.json');
+// console.log(test);
 
 export default {
   components: {
@@ -93,7 +100,7 @@ export default {
   },
   mounted: function() {
     // Retrieving Products (public folder)
-    fetch('./products.json')
+    fetch("./products.json")
       .then(r => r.json())
       .then(json => {
         this.prods_list = json

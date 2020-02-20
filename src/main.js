@@ -10,6 +10,21 @@ const routes = {
   '/shop': Shop,
 };
 
+
+// Filtre global de formattage appliqué aux v-bind ou aux mustaches {{ }}
+Vue.filter('formatPriceGlobal', function(number) {
+  let returned = number.toString(); 
+  const splitted = returned.split('.');
+  if (splitted[1]) {
+    splitted[1].length > 0 && splitted[1].length < 2 ?
+      returned = returned + '0' : '';
+  } else {
+    returned = splitted[0] + '.00';
+  }
+  return returned;
+});
+
+
 new Vue({
 
 
