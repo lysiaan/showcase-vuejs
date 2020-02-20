@@ -5,40 +5,63 @@
 
     <Menu btn_active="Shop"></Menu>
 
-    <div @click="clickCart()" class="btn-cart">
-      <img class="logo-cart" height=80 src="../assets/logo-cart.svg" alt="Panier">
+  <!-- <button @click="load_main = !load_main">
+    Permuter
+  </button> -->
+
+    <!-- Méthode la moins propre, en tweakant le hook mounted avec variable :  -->
+
+    <!-- <transition name="custom-classes-transition" enter-active-class="animated bounceIn">
+      <div v-if="load_main === true" @click="clickCart()" class="btn-cart">
+        <img class="logo-cart" height=80 src="../assets/logo-cart.svg" alt="Panier">
+      </div>
+    </transition> -->
+
+    <!-- Méthode dédiée à cette tâche, avec appear -->
+    <div class="btn-cart-container">
+      <transition 
+        appear appear-active-class="animated bounceInRight">
+        <div @click="clickCart()" class="btn-cart">
+          <img class="logo-cart" height=80 src="../assets/logo-cart.svg" alt="Panier">
+        </div>
+      </transition>
     </div>
-    
+
+
     <ul class="categories">
       <li :class="{active: is_cat_active === category}" @click="setActiveCat(category)" :key="category.id" v-for="category in cats"><a>{{ category }}</a></li>
     </ul>
 
-    <div class="products-container">
-      <div class="product" :key="prod.id" v-for="prod in prods_current" >
-        <div class="prod-thumbnail"></div>
-        <a class="prod-title">{{ prod.title }}</a>
-        <div class="prod-details">
-          <div class="prod-detail details-left">
-            <div class="details-left-contained">
-              <div class="prod-available">    
-                <div class="prod-available-icon"></div>
-                <span class="prod-available-text">en stock</span>
-              </div>
-              <div class="prod-price">
-                <a>{{ prod.price | formatPriceGlobal }} €</a>
-                <!-- On peux aussi utiliser un filtre local du composant : -->
-                <!-- <a>{{ prod.price | formatPrice }} €</a> -->
+      <transition-group name="product-list"
+        enter-active-class="animated bounceIn"
+        tag="div"
+        v-bind:class="'products-container'">
+        <div class="product" :key="prod.id" v-for="prod in prods_current" >
+          <div class="prod-thumbnail"></div>
+          <a class="prod-title">{{ prod.title }}</a>
+          <div class="prod-details">
+            <div class="prod-detail details-left">
+              <div class="details-left-contained">
+                <div class="prod-available">    
+                  <div class="prod-available-icon"></div>
+                  <span class="prod-available-text">en stock</span>
+                </div>
+                <div class="prod-price">
+                  <a>{{ prod.price | formatPriceGlobal }} €</a>
+                  <!-- On peux aussi utiliser un filtre local du composant : -->
+                  <!-- <a>{{ prod.price | formatPrice }} €</a> -->
+                </div>
               </div>
             </div>
-          </div>
-          <div class="prod-detail details-right">
-            <div class="prod-icon-cart">
-              <img src="../assets/logo-add.svg" alt="">
+            <div class="prod-detail details-right">
+              <div class="prod-icon-cart">
+                <img src="../assets/logo-add.svg" alt="">
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+
+      </transition-group>
 
   </div>
 </div>
@@ -47,7 +70,11 @@
 
 
 <script>
+
 import Menu from '../components/Menu';
+import "animate.css/source/_base.css";
+import "animate.css/source/bouncing_entrances/bounceIn.css";
+import "animate.css/source/bouncing_entrances/bounceInRight.css";
 
 // Dans le cas d'une récupération de fichier qui ne serait pas
 // dans le dossier  public, utilier require :
@@ -63,6 +90,7 @@ export default {
       cats: [],
       is_cat_active: '',
       prods_list: '',
+      load_main: false,
     }
   },
   methods: {
@@ -99,6 +127,7 @@ export default {
     }
   },
   mounted: function() {
+    this.load_main = true;
     // Retrieving Products (public folder)
     fetch("./products.json")
       .then(r => r.json())
@@ -120,11 +149,18 @@ export default {
 
 <style scoped>
 
+/* .list-enter {
+  opacity: 0;
+}
+
+.list-enter-active {
+  transition: opacity .5s;
+} */
+
 .blank {
   height: 1px;
   width: 1px;
 }
-
 
 .details-right {
   position: relative;
@@ -232,21 +268,30 @@ export default {
   
 }
 
+.btn-cart-container {
+  position: absolute;
+  width: 160px;
+  top: 4rem;
+  right: 0;
+  overflow: hidden;
+}
+
 .btn-cart {
   height: 100px;
-  width: 130px;
+  /* We give him an abusive width and position
+  in match with bounce-from-right animation (animate.css) */
+  width: 190px;
+  position: relative;
+  right: -20px;
   background: #E3B600;
   border-radius: 30px 0px 0px 30px;
-  position: absolute;
-  right: 0;
-  top: 4rem;
   cursor: pointer;
 }
 
 .logo-cart {
   position: absolute;
   top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-80%, -50%);
 }
 
 .categories {
@@ -269,5 +314,9 @@ export default {
   border: 2px solid #38393D;
   border-radius: 20px;
 }
+
+/* body {
+  overflow: hidden
+} */
 
 </style>
