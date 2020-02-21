@@ -29,18 +29,20 @@ export default {
   mounted: function() {
     this.container = document.querySelector('.container-root-cart');
   },
+  methods: {
+    addProdToCart: function(prod) {
+      console.log('on ajoute la prod ' + prod.title);
+    }
+  },
   computed: {
     is_cart_deployed: function() {
       return this.deployed;
     },
-    container_zindex_style: function() {
-      return this.deployed === true ? 'z-index: 50;' : 'z-index: 30;'
-    }
   },
   watch: {
-    // Is the cart button over or under the cart-container ?
+    // Is the cart-deployment-button over or under the cart-container ?
     // (need to considerate the animation timing)
-    container_zindex_style: function() {
+    is_cart_deployed: function() {
       if (this.deployed === true) {
         this.container.style.zIndex = '50'
       } else {
@@ -50,9 +52,6 @@ export default {
       }
     }
   },
-  methods: {
-
-  }
 }
 </script>
 

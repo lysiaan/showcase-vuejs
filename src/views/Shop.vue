@@ -18,7 +18,7 @@
         </div>
       </transition>
     </div>
-    <Cart :deployed="is_cart_deployed" v-on:toggle-deployed="is_cart_deployed = $event"></Cart>
+    <Cart ref="refCart" :deployed="is_cart_deployed" v-on:toggle-deployed="is_cart_deployed = $event"></Cart>
     <ul class="categories">
       <li :class="{active: is_cat_active === category}" @click="setActiveCat(category)" :key="category.id" v-for="category in cats"><a>{{ category }}</a></li>
     </ul>
@@ -27,8 +27,8 @@
       v-on:enter="enterProd"
       tag="div"
       v-bind:class="'products-container'">
-      <Product :data-index="index" :key="prod.id" v-for="(prod, index) in prods_current"
-        :title="prod.title" :price="prod.price" :index="index" :image="prod.image"
+      <Product v-on:add-prod-to-cart="addProdToCart($event)" :data-index="index" :key="prod.id" v-for="(prod, index) in prods_current"
+        :prod="prod"
       ></Product>
     </transition-group>
   </div>
@@ -65,9 +65,13 @@ export default {
       prods_list: '',
       load_main: false,
       is_cart_deployed: false,
+      // bus: new Vue(),
     }
   },
   methods: {
+    addProdToCart: function(prod) {
+      this.$refs.refCart.addProdToCart(prod);
+    },
     clickCart: function () {
       this.is_cart_deployed = !this.is_cart_deployed;
       console.log(this.is_cart_deployed);
@@ -83,7 +87,7 @@ export default {
       // Apres avoir essayé d'appliquer des délais d'entrée sur
       // un transition-group avec des classes CSS (animate.css),
       // j'en conclus que cette feature n'est possible qu'en
-      // utilisant à la place des animations JS. En voici une
+      // utilisant plutôt des animations JS. En voici une
       // custom, sans faire appel à une quelconque librairie.
       // =====================================================
       // Custom animation : Opacity
@@ -236,8 +240,5 @@ export default {
   border-radius: 20px;
 }
 
-/* body {
-  overflow: hidden
-} */
 
 </style>

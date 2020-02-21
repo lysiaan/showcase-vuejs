@@ -3,7 +3,7 @@
     <div class="prod-thumbnail">
       <img height=180 :src="image_path" alt="">
     </div>
-    <a class="prod-title">{{ title }}</a>
+    <a class="prod-title">{{ prod.title }}</a>
     <div class="prod-details">
       <div class="prod-detail details-left">
         <div class="details-left-contained">
@@ -12,14 +12,14 @@
             <span class="prod-available-text">en stock</span>
           </div>
           <div class="prod-price">
-            <a>{{ price | formatPriceGlobal }} €</a>
+            <a>{{ prod.price | formatPriceGlobal }} €</a>
             <!-- On peux aussi utiliser un filtre local du composant : -->
             <!-- <a>{{ prod.price | formatPrice }} €</a> -->
           </div>
         </div>
       </div>
       <div class="prod-detail details-right">
-        <div class="prod-icon-cart">
+        <div @click="$emit('add-prod-to-cart', prod)" class="prod-icon-cart">
           <img src="../assets/logo-add.svg" alt="">
         </div>
       </div>
@@ -31,12 +31,10 @@
 
 <script>
 export default {
-  props: [
-    'title', 'price', 'image'
-  ],
+  props: ['prod'],
   computed: {
     image_path: function() {
-      return "img/" + this.image;
+      return "img/" + this.prod.image;
     }
   },
   filters: {
