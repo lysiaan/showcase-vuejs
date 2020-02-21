@@ -18,6 +18,7 @@
         </div>
       </transition>
     </div>
+    <Cart :deployed="is_cart_deployed" v-on:toggle-deployed="is_cart_deployed = $event"></Cart>
     <ul class="categories">
       <li :class="{active: is_cat_active === category}" @click="setActiveCat(category)" :key="category.id" v-for="category in cats"><a>{{ category }}</a></li>
     </ul>
@@ -40,10 +41,11 @@
 
 import Menu from '../components/Menu';
 import Product from '../components/Product';
+import Cart from '../components/Cart';
 import "animate.css/source/_base.css";
+import "animate.css/source/bouncing_entrances/bounceInRight.css";
 // import "animate.css/source/bouncing_entrances/bounceIn.css";
 // import "animate.css/source/zooming_entrances/zoomIn.css";
-import "animate.css/source/bouncing_entrances/bounceInRight.css";
 
 // Dans le cas d'une récupération de fichier qui ne serait pas
 // dans le dossier  public, utilier require :
@@ -54,6 +56,7 @@ export default {
   components: {
     Menu,
     Product,
+    Cart,
   },
   data: function() {
     return {
@@ -61,11 +64,13 @@ export default {
       is_cat_active: '',
       prods_list: '',
       load_main: false,
+      is_cart_deployed: false,
     }
   },
   methods: {
     clickCart: function () {
-      // to do
+      this.is_cart_deployed = !this.is_cart_deployed;
+      console.log(this.is_cart_deployed);
     },
     setActiveCat: function(string) {
       this.is_cat_active = string;
@@ -180,7 +185,7 @@ export default {
   color: #2c3e50;
   background: #FFCC00;
   min-height: 100vh;
-  
+  position: relative;
 }
 
 .btn-cart-container {
@@ -201,6 +206,7 @@ export default {
   background: #E3B600;
   border-radius: 30px 0px 0px 30px;
   cursor: pointer;
+  z-index: 40;
 }
 
 .logo-cart {
