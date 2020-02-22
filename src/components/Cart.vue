@@ -1,13 +1,11 @@
 <template>
   <div class="container-root-cart">
-    <transition name="cart-transition" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
-      <div v-if="is_cart_deployed" class="root-cart">
+    <transition-group name="cart-transition" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
+      <div :key="1" v-if="is_cart_deployed" class="root-cart-top">
         <div class="container-btn-close">
           <a @click="$emit('toggle-deployed', !deployed)" class="btn-close">X</a>
         </div>
         <div class="container-prods">
-          <div class="separator">
-          </div>
           <div v-if="cart_elems.length === 0">
             <div class="container-empty">
               <a class="empty">Aucun article dans le panier</a>
@@ -15,6 +13,8 @@
           </div>
           <transition-group name="prod-transition" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
             <div :key="elem.prod.id" v-for="elem in cart_elems" class="prod">	
+              <div class="separator">
+              </div>
               <div class="container-prod-title">
                 <a class="prod-title">{{ elem.prod.title }}</a><br>
               </div>
@@ -30,21 +30,22 @@
                   <a>{{ elem.total | formatPriceGlobal }} €</a>
                 </div>
               </div>
-              <div class="separator">
-              </div>
+
             </div>
           </transition-group>
-          <div class="container-total-price">
-            <div class="tax">
-              <a>Total HT</a>
-            </div>
-            <div class="total-price">
-              <a>{{ total_price | formatPriceGlobal }} €</a>
-            </div>
+        </div>
+      </div>
+      <div v-if="is_cart_deployed" :key="2" class="root-cart-bottom">
+        <div class="container-total-price">
+          <div class="tax">
+            <a>Total HT</a>
+          </div>
+          <div class="total-price">
+            <a>{{ total_price | formatPriceGlobal }} €</a>
           </div>
         </div>
       </div>
-    </transition>
+    </transition-group>
   </div>
 </template>
 
@@ -73,12 +74,10 @@ export default {
       const result = this.findProdInCart(prod); 
       if (result) {
         // Add quantity by one
-        console.log('on incrémente cette prod de 1');
         result.cart_elem.quantity++;
         this.updateProdTotal(result.cart_elem);
         this.hightlightProduct(result.cart_elem, true);
       } else {
-        console.log('cette prod est nouvellement ajoutée');
         const new_cart_elem = {
           prod: prod,
           quantity: 1,
@@ -87,11 +86,12 @@ export default {
         }
         this.cart_elems.push(new_cart_elem);
       }
-      console.log(this.cart_elems);
+      // window.body.style.height = document.getElementsByClassName("container-root-cart").style.height;
+      // console.log(document.querySelector(".root-cart"));
+      // console.log(document.querySelector(".root-cart").style.offsetHeight);
     },
     removeProdFromCart: function(prod) {
       const result = this.findProdInCart(prod);
-      console.log(result);
       if (result) {
         const cart_elem = result.cart_elem;
         if (cart_elem.quantity > 1) {
@@ -177,7 +177,7 @@ export default {
 }
 
 .container-total-price {
-  margin-top: 40px;
+  /* padding-top: 40px; */
 }
 
 .container-prod-total {
@@ -257,21 +257,24 @@ export default {
 }
 
 .container-root-cart {
-  width: 300px;
+  width: 350px;
   height: 100%;
   position: absolute;
   top: 0;
   right: 0;
   z-index: 0;
+  overflow:hidden;
+  position: fixed;
 }
 
-.root-cart {
+.root-cart-top {
   background: rgba(0,0,0, 0.8);
   animation-duration: 300ms;
-  /* position: absolute; */
-  height: 100%;
+  height: 85%;
   width: 100%;
   z-index: 51;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .container-btn-close {
@@ -287,8 +290,13 @@ export default {
   cursor: pointer;
 }
 
-.container-root-cart {
-  overflow:hidden;
+.root-cart-bottom {
+  background: rgba(0,0,0, 0.9);
+  height: 15%;
+  animation-duration: 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
