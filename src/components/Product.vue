@@ -79,6 +79,7 @@ export default {
 
 .prod-icon-cart:hover {
   background: #9abe0a;
+  background: #e9dd49;
 }
 
 .prod-price {
@@ -134,7 +135,8 @@ export default {
 .prod-thumbnail {
   height: 180px;
   width: 100%;
-  background: #DFDFDF;
+  /* background: #DFDFDF; */
+  background: white;
 }
 
 .product {
