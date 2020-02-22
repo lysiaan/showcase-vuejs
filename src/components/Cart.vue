@@ -266,7 +266,7 @@ export default {
 }
 
 .root-cart {
-  background: rgba(0,0,0, 0.7);
+  background: rgba(0,0,0, 0.8);
   animation-duration: 300ms;
   /* position: absolute; */
   height: 100%;

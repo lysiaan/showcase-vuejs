@@ -1,7 +1,7 @@
 <template>
 <div> 
   <div class="root">
-    <Menu btn_active="Home"></Menu>
+    <Menu current_page="Home"></Menu>
     <img class="logo" src="../assets/logo-home.svg" alt="logo">
   </div>
 </div>

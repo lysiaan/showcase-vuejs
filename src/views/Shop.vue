@@ -2,7 +2,7 @@
 <div>
   <div class="root">
     <div class="blank"></div>
-    <Menu btn_active="Shop"></Menu>
+    <Menu current_page="Shop"></Menu>
     <!-- Méthode la moins propre, en tweakant le hook mounted avec variable :  -->
     <!-- <transition name="custom-classes-transition" enter-active-class="animated bounceIn">
       <div v-if="load_main === true" @click="clickCart()" class="btn-cart">

@@ -3,8 +3,8 @@
 <div>
   <div class="root">
     <nav>
-      <a @click="setActive('Home')" :class="{active: isActive('Home')}" href="/">Home</a>
-      <a @click="setActive('Shop')" :class="{active: isActive('Shop')}" href="/shop">Shop</a>
+      <a @click="setCurrentPage('Home')" :class="{active: isCurrentPage('Home')}" href="/">Home</a>
+      <a @click="setCurrentPage('Shop')" :class="{active: isCurrentPage('Shop')}" href="/shop">Shop</a>
     </nav>
   </div>
 </div>
@@ -15,14 +15,14 @@
 <script>
 export default {
   props: [
-    'btn_active'
+    'current_page'
   ],
   methods: {
-    isActive: function(item) {
-      return item === this.btn_active;
+    isCurrentPage: function(page) {
+      return page === this.current_page;
     },
-    setActive: function(item) {
-      this.btn_active = item;
+    setCurrentPage: function(page) {
+      this.current_page = page;
     }
   }
 }
