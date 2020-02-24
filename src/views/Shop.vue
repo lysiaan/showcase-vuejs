@@ -1,6 +1,7 @@
 <template>
 <div>
   <div class="root">
+  <!-- <div @click="closeCart" class="root"> -->
     <div class="blank"></div>
     <Menu current_page="Shop"></Menu>
     <!-- Méthode la moins propre, en tweakant le hook mounted avec variable :  -->
@@ -15,10 +16,11 @@
         appear appear-active-class="animated bounceInRight">
         <div @click="clickCart()" class="btn-cart">
           <img class="logo-cart" height=80 src="../assets/logo-cart.svg" alt="Panier">
+          <span class="total-quantity">{{ total_quantity }}</span>
         </div>
       </transition>
     </div>
-    <Cart ref="refCart" :deployed="is_cart_deployed" v-on:toggle-deployed="is_cart_deployed = $event"></Cart>
+    <Cart ref="refCart" :deployed="is_cart_deployed" v-on:toggle-deployed="is_cart_deployed = $event" v-on:total_quantity="total_quantity = $event"></Cart>
     <ul class="categories">
       <li :class="{active: is_cat_active === category}" @click="setActiveCat(category)" :key="category.id" v-for="category in cats"><a>{{ category }}</a></li>
     </ul>
@@ -44,6 +46,7 @@ import Product from '../components/Product';
 import Cart from '../components/Cart';
 import "animate.css/source/_base.css";
 import "animate.css/source/bouncing_entrances/bounceInRight.css";
+import "animate.css/source/attention_seekers/heartBeat.css";
 // import "animate.css/source/bouncing_entrances/bounceIn.css";
 // import "animate.css/source/zooming_entrances/zoomIn.css";
 
@@ -65,12 +68,22 @@ export default {
       prods_list: '',
       load_main: false,
       is_cart_deployed: false,
-      // bus: new Vue(),
+      total_quantity: 0,
+      elm_btn_cart_container: null,
     }
   },
   methods: {
+    closeCart: function() {
+      if (this.is_cart_deployed) {
+        this.is_cart_deployed = false;
+      }
+    },
     addProdToCart: function(prod) {
       this.$refs.refCart.addProdToCart(prod);
+      if (!this.is_cart_deployed) {
+        this.elm_btn_cart_container.classList.add("animated", "heartBeat");
+        setTimeout(()=>{this.elm_btn_cart_container.classList.remove("animated", "heartBeat")}, 300);
+      }
     },
     clickCart: function () {
       this.is_cart_deployed = !this.is_cart_deployed;
@@ -135,6 +148,8 @@ export default {
     }
   },
   mounted: function() {
+    this.elm_btn_cart_container = document.querySelector('.btn-cart-container');
+    console.log(this.elm_btn_cart_container);
     this.load_main = true;
     // Retrieving Products (public folder)
     fetch("./products.json")
@@ -193,11 +208,32 @@ export default {
 }
 
 .btn-cart-container {
-  position: absolute;
+  position: fixed;
   width: 160px;
   top: 4rem;
   right: 0;
   overflow: hidden;
+  z-index: 40;
+}
+
+.total-quantity {
+  color: white;
+  border: 3px solid white;
+  padding: 3px 8px;
+  border-radius: 50px;
+  background: #E3B600;
+  z-index: 42;
+  display: inline;
+  position: relative;
+  top: 9px;
+  left: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-cart img {
+  z-index: 41;
+  display: block;
 }
 
 .btn-cart {
@@ -208,6 +244,7 @@ export default {
   position: relative;
   right: -20px;
   background: #E3B600;
+  background: #ddb000;
   border-radius: 30px 0px 0px 30px;
   cursor: pointer;
   z-index: 40;

@@ -65,6 +65,7 @@ export default {
     return {
       container: null,
       zindex: '30',
+      total_quantity: 0,
       cart_elems: []
     }
   },
@@ -73,6 +74,7 @@ export default {
   },
   methods: {
     addProdToCart: function(prod) {
+      this.total_quantity++;
       const result = this.findProdInCart(prod); 
       if (result) {
         // Add quantity by one
@@ -93,6 +95,7 @@ export default {
       // console.log(document.querySelector(".root-cart").style.offsetHeight);
     },
     removeProdFromCart: function(prod) {
+      this.total_quantity > 0 ? this.total_quantity-- : null;
       const result = this.findProdInCart(prod);
       if (result) {
         const cart_elem = result.cart_elem;
@@ -138,7 +141,7 @@ export default {
         result += cart_elem.total;
       });
       return Math.round(result * 100) / 100;
-    }
+    },
   },
   watch: {
     // Is the cart-deployment-button over or under the cart-container ?
@@ -151,6 +154,9 @@ export default {
           this.container.style.zIndex = '30'
         }, 300);
       }
+    },
+    total_quantity: function() {
+      this.$emit('total_quantity', this.total_quantity);
     }
   },
 }
