@@ -30,20 +30,22 @@
                   <a>{{ elem.total | formatPriceGlobal }} €</a>
                 </div>
               </div>
-
             </div>
           </transition-group>
         </div>
       </div>
       <div v-if="is_cart_deployed" :key="2" class="root-cart-bottom">
-        <div class="container-total-price">
+
           <div class="tax">
             <a>Total HT</a>
           </div>
           <div class="total-price">
             <a>{{ total_price | formatPriceGlobal }} €</a>
           </div>
-        </div>
+          <div v-if="cart_elems.length > 0" class="btn-order">
+            <a>Commander</a>
+          </div>
+
       </div>
     </transition-group>
   </div>
@@ -120,7 +122,7 @@ export default {
     },
     hightlightProduct: function(elem, direction) {
       if (!elem.quantity_style) {
-        const style = direction ? "color: #31f00f" : "color: #f16841";
+        const style = direction ? "color: #4fb34d" : "color: #ec8888";
         elem.quantity_style = style;
         setTimeout( ()=>{elem.quantity_style = ""}, 500 );
       }
@@ -176,12 +178,54 @@ export default {
   color: #edd83f;
 }
 
-.container-total-price {
-  /* padding-top: 40px; */
+.btn-order {
+  margin-top: 30px;
+  padding: 12px 20px;
+  color: black;
+  background: #edd83f;
+
+  border-radius: 10px;
+  cursor: pointer;
+  /* font-weight: 600; */
+  font-size: 0.9em;
+  box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.btn-order:hover {
+  color: white;
+  background: #38393D;
+}
+
+.root-cart-bottom {
+  background: rgba(0,0,0, 0.9);
+  animation-duration: 300ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.root-cart-top {
+  height: calc(100% - 200px);
+  background: rgba(0,0,0, 0.8);
+  animation-duration: 300ms;
+  width: 100%;
+  z-index: 51;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.container-prod-total a {
+ /* border: 1px solid white;
+ border-radius: 26px; */
+ color: #edd83f;
 }
 
 .container-prod-total {
-  margin-bottom: 24px;
+  margin-bottom: 24px
 }
 
 .btn-change-qte {
@@ -236,6 +280,8 @@ export default {
   margin-bottom: 10px;
   display: inline-block;
   width: 49%;
+  font-style: italic;
+  color: #cacaca;
 }
 
 .container-prod-title {
@@ -267,16 +313,6 @@ export default {
   position: fixed;
 }
 
-.root-cart-top {
-  background: rgba(0,0,0, 0.8);
-  animation-duration: 300ms;
-  height: 85%;
-  width: 100%;
-  z-index: 51;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
 .container-btn-close {
   text-align: left;
   padding-top: 20px;
@@ -288,15 +324,6 @@ export default {
   font-size: 2em;
   margin-left: 20px;
   cursor: pointer;
-}
-
-.root-cart-bottom {
-  background: rgba(0,0,0, 0.9);
-  height: 15%;
-  animation-duration: 300ms;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 </style>
