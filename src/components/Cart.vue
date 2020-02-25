@@ -12,11 +12,13 @@
             </div>
           </div>
           <transition-group name="prod-transition" enter-active-class="animated slideInRight" leave-active-class="animated slideOutRight">
-            <div :key="elem.prod.id" v-for="elem in cart_elems" class="prod">	
+            <!-- V-FOR -->
+            <div :key="elem.prod.id" v-for="(elem, index) in cart_elems" class="prod">	
               <div class="separator">
               </div>
               <div class="container-prod-title">
-                <a class="prod-title">{{ elem.prod.title }}</a><br>
+                <div><a class="prod-title">{{ elem.prod.title }}</a><br></div>
+                <div @click="removeEntireProdFromCart(index)">X</div>
               </div>
               <div class="container-qte-btns">
                 <div class="container-prod-quantity">
@@ -31,6 +33,7 @@
                 </div>
               </div>
             </div>
+            <!-- END V-FOR -->
           </transition-group>
         </div>
       </div>
@@ -93,6 +96,10 @@ export default {
       // window.body.style.height = document.getElementsByClassName("container-root-cart").style.height;
       // console.log(document.querySelector(".root-cart"));
       // console.log(document.querySelector(".root-cart").style.offsetHeight);
+    },
+    removeEntireProdFromCart(index) {
+      this.total_quantity = this.total_quantity - this.cart_elems[index].quantity;
+      this.cart_elems.splice(index, 1);
     },
     removeProdFromCart: function(prod) {
       this.total_quantity > 0 ? this.total_quantity-- : null;
@@ -295,6 +302,31 @@ export default {
   margin-bottom: 14px;
 }
 
+.container-prod-title div {
+  display: inline-block;
+}
+
+.container-prod-title div a {
+  display: inline-block;
+  padding: 0 !important;
+}
+
+.container-prod-title div:first-child {
+  margin-left: 30px;
+  width: 275px;
+}
+
+.container-prod-title div:last-child {
+  width: 16px;
+  color:#8b8b8b;
+  cursor: pointer;
+  user-select: none;
+}
+
+.container-prod-title div:last-child:hover {
+  color: white;
+}
+
 .container-prod-title a {
   font-weight: bold;
 }
@@ -330,6 +362,7 @@ export default {
   font-size: 2em;
   margin-left: 20px;
   cursor: pointer;
+  user-select: none;
 }
 
 </style>
