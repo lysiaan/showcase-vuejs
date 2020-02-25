@@ -93,9 +93,6 @@ export default {
         }
         this.cart_elems.push(new_cart_elem);
       }
-      // window.body.style.height = document.getElementsByClassName("container-root-cart").style.height;
-      // console.log(document.querySelector(".root-cart"));
-      // console.log(document.querySelector(".root-cart").style.offsetHeight);
     },
     removeEntireProdFromCart(index) {
       this.total_quantity = this.total_quantity - this.cart_elems[index].quantity;
@@ -196,7 +193,6 @@ export default {
   padding: 12px 20px;
   color: black;
   background: #edd83f;
-
   border-radius: 10px;
   cursor: pointer;
   /* font-weight: 600; */

@@ -259,22 +259,41 @@ export default {
 .categories {
   font-size: 1.2em;
   color: #a67400;
+  color: #b2b2b2;
   margin-top: 100px;
 }
 
 .categories > li {
   display: inline-block;
-  padding: 8px 8px 6px 8px;
+  padding: 14px 14px 12px 14px;
   cursor: pointer;
   margin-left: 10px !important;
   margin-right: 10px !important;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0, 0.2);
+  background: #38393D;
+  color: #afb0b6;
+  background: #d7d7d7;
+  color: #6f7179;
+  letter-spacing: 2px;
+  font-size: 0.9em;
+  transition: 0.2s all ease;
 }
 
 .categories > li.active {
-  color: #38393D;
-  font-weight: bold;
-  border: 2px solid #38393D;
-  border-radius: 20px;
+  color: rgb(61, 61, 61);
+  color: rgb(110, 68, 68);
+  font-size: 1em;
+  color: rgb(22, 22, 22);
+  background: rgb(246, 246, 246);
+  color: white;
+  background: #38393D;
+  transform: scale(1.1);
+  
+  /* font-weight: bold; */
+  /* border: 2px solid #38393D; */
+  /* border-radius: 20px; */
 }
 
 
