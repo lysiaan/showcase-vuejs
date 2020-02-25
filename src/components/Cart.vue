@@ -82,7 +82,7 @@ export default {
       if (result) {
         // Add quantity by one
         result.cart_elem.quantity++;
-        this.updateProdTotal(result.cart_elem);
+        this.updateProdTotalPrice(result.cart_elem);
         this.hightlightProduct(result.cart_elem, true);
       } else {
         const new_cart_elem = {
@@ -105,7 +105,7 @@ export default {
         const cart_elem = result.cart_elem;
         if (cart_elem.quantity > 1) {
           cart_elem.quantity--;
-          this.updateProdTotal(cart_elem);
+          this.updateProdTotalPrice(cart_elem);
           this.hightlightProduct(result.cart_elem, false);
         } else {
           this.cart_elems.splice(result.index, 1)
@@ -123,7 +123,7 @@ export default {
       }
       return false;
     },
-    updateProdTotal: function(cart_elem) {
+    updateProdTotalPrice: function(cart_elem) {
       // Arrondi à 2 chiffres après la virgule
       cart_elem.total = Math.round(cart_elem.prod.price * cart_elem.quantity * 100) / 100;
     },

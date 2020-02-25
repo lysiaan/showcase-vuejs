@@ -45,6 +45,33 @@
       "rating": "",
       "description": "",
       "image": "gelee.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Vinaigre de miel - 25cl",
+      "category": "alimentaire",
+      "price": 8.99,
+      "rating": "",
+      "description": "",
+      "image": "vinaigre-miel.png"
+    },
+    {
+      "id": 7,
+      "title": "Moutarde au miel - 100g",
+      "category": "alimentaire",
+      "price": 6.75,
+      "rating": "",
+      "description": "",
+      "image": "moutarde-miel.png"
+    },
+    {
+      "id": 8,
+      "title": "Bière au miel de châtaigne",
+      "category": "alimentaire",
+      "price": 4.99,
+      "rating": "",
+      "description": "",
+      "image": "biere-miel.jpg"
     }
   ]
 },
@@ -52,25 +79,44 @@
   "category": "matériel",
   "products": [
     {
-      "id": 6,
+      "id": 56,
       "title": "Cadre pour ruche",
       "category": "matériel",
-      "price": 55.59,
+      "price": 29.59,
       "rating": "",
       "description": "",
       "image": "cadre.jpg"
     },
     {
-      "id": 7,
+      "id": 57,
       "title": "Grattoir cadre",
       "category": "matériel",
       "price": 9.99,
       "rating": "",
       "description": "",
       "image": "grattoir.jpg"
+    },
+    {
+      "id": 58,
+      "title": "Enfumoir",
+      "category": "matériel",
+      "price": 34.75,
+      "rating": "",
+      "description": "",
+      "image": "enfumoir.jpg"
+    },
+    {
+      "id": 59,
+      "title": "Poignée de levage cadre",
+      "category": "matériel",
+      "price": 14.86,
+      "rating": "",
+      "description": "",
+      "image": "poignee.jpg"
     }
   ]
 }]
+
 
 
 

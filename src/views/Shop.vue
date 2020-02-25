@@ -188,10 +188,11 @@ export default {
 .products-container {
   display: flex;
   flex-wrap: wrap;
-  width: 82vw;
-  position: relative;
+  width: 78vw;
+  padding-left: 10vw;
+  /* position: relative;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
   margin-top: 100px;
   padding-bottom: 200px;
 }
