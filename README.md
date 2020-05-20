@@ -1,4 +1,8 @@
-# train-shop
+# showcase-vuejs
+
+## Description
+Ce projet est un exemple de réalisation avec la librairie VueJs
+This project is an example of production with the VueJs library. It shows an artificial trade site selling honey and material.
 
 ## Project setup
 ```
