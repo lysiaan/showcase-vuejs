@@ -13,8 +13,6 @@
           </div>
           <div class="prod-price">
             <a>{{ prod.price | formatPriceGlobal }} €</a>
-            <!-- On peux aussi utiliser un filtre local du composant : -->
-            <!-- <a>{{ prod.price | formatPrice }} €</a> -->
           </div>
         </div>
       </div>
@@ -36,21 +34,7 @@ export default {
     image_path: function() {
       return "img/" + this.prod.image;
     }
-  },
-  filters: {
-    // Add '0' in the case of single decimal digit, and '.00' if no decimal
-    formatPrice: function(number) {
-      let returned = number.toString(); 
-      const splitted = returned.split('.');
-      if (splitted[1]) {
-        splitted[1].length > 0 && splitted[1].length < 2 ?
-          returned = returned + '0' : '';
-      } else {
-        returned = splitted[0] + '.00';
-      }
-      return returned;
-    }
-  },
+  }
 }
 </script>
 
@@ -135,7 +119,6 @@ export default {
 .prod-thumbnail {
   height: 180px;
   width: 100%;
-  /* background: #DFDFDF; */
   background: white;
 }
 

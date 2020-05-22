@@ -1,16 +1,8 @@
 <template>
 <div>
   <div class="root">
-  <!-- <div @click="closeCart" class="root"> -->
     <div class="blank"></div>
     <Menu current_page="Shop"></Menu>
-    <!-- Méthode la moins propre, en tweakant le hook mounted avec variable :  -->
-    <!-- <transition name="custom-classes-transition" enter-active-class="animated bounceIn">
-      <div v-if="load_main === true" @click="clickCart()" class="btn-cart">
-        <img class="logo-cart" height=80 src="../assets/logo-cart.svg" alt="Panier">
-      </div>
-    </transition> -->
-    <!-- Méthode dédiée à cette tâche, avec appear -->
     <div class="btn-cart-container">
       <transition 
         appear appear-active-class="animated bounceInRight">
@@ -47,13 +39,7 @@ import Cart from '../components/Cart';
 import "animate.css/source/_base.css";
 import "animate.css/source/bouncing_entrances/bounceInRight.css";
 import "animate.css/source/attention_seekers/heartBeat.css";
-// import "animate.css/source/bouncing_entrances/bounceIn.css";
-// import "animate.css/source/zooming_entrances/zoomIn.css";
 
-// Dans le cas d'une récupération de fichier qui ne serait pas
-// dans le dossier  public, utilier require :
-// const test = require('../assets/test.json');
-// console.log(test);
 
 export default {
   components: {
@@ -97,12 +83,6 @@ export default {
       el.style.left = '-40px';
     },
     enterProd: function(el) {
-      // Apres avoir essayé d'appliquer des délais d'entrée sur
-      // un transition-group avec des classes CSS (animate.css),
-      // j'en conclus que cette feature n'est possible qu'en
-      // utilisant plutôt des animations JS. En voici une
-      // custom, sans faire appel à une quelconque librairie.
-      // =====================================================
       // Custom animation : Opacity
       const delay = el.dataset.index * 100;
       setTimeout(() => {
@@ -112,8 +92,6 @@ export default {
           opa += decrease;
           el.style.opacity = opa;
           decrease -= - 0.0002;
-          // Check this for non infinite loop...
-          // console.log(el.style.opacity);
           if (opa > 1) {
             clearInterval(interval);
           }
@@ -127,8 +105,6 @@ export default {
           pos -= decrease;
           el.style.left = '-'+pos+'px';
           decrease -= 0.01;
-          // Check this for non infinite loop...
-          // console.log(el.style.left);
           if (pos < 0) {
             clearInterval(interval);
           }
@@ -172,14 +148,6 @@ export default {
 
 <style scoped>
 
-/* .list-enter {
-  opacity: 0;
-}
-
-.list-enter-active {
-  transition: opacity .5s;
-} */
-
 .blank {
   height: 1px;
   width: 1px;
@@ -190,9 +158,6 @@ export default {
   flex-wrap: wrap;
   width: 78vw;
   padding-left: 10vw;
-  /* position: relative;
-  margin-left: auto;
-  margin-right: auto; */
   margin-top: 100px;
   padding-bottom: 200px;
 }
@@ -292,9 +257,6 @@ export default {
   background: #38393D;
   transform: scale(1.1);
   
-  /* font-weight: bold; */
-  /* border: 2px solid #38393D; */
-  /* border-radius: 20px; */
 }
 
 

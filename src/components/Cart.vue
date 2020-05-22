@@ -195,7 +195,6 @@ export default {
   background: #edd83f;
   border-radius: 10px;
   cursor: pointer;
-  /* font-weight: 600; */
   font-size: 0.9em;
   box-shadow: 0 0 20px rgba(0,0,0, 0.5);
   text-transform: uppercase;
@@ -228,9 +227,7 @@ export default {
 }
 
 .container-prod-total a {
- /* border: 1px solid white;
- border-radius: 26px; */
- color: #edd83f;
+  color: #edd83f;
 }
 
 .container-prod-total {
