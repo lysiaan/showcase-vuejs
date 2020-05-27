@@ -1,7 +1,7 @@
 # showcase-vuejs
 
 ## Description
-This project is an example of production with the VueJs library. It shows an fictional trade site selling honey and material.
+This project is an example of production with the VueJs library. It shows a fictional trade site selling honey and material.
 
 ## Project setup
 ```
